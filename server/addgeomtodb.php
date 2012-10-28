@@ -29,11 +29,11 @@
  * 
  */
 
-	$host = "host=localhost";
-	$port = "port=5432";
-	$dbname = "dbname=hul_prod";
-	$username = "user=hul";
-	$password = "password={DIY}Syndr*me";
+	$host = "host=";
+	$port = "port=";
+	$dbname = "dbname=";
+	$username = "user=";
+	$password = "password=";
 	
 	$full = $host." ".$port." ".$dbname." ".$username." ".$password;
 
