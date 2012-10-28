@@ -1,0 +1,152 @@
+body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label
+{
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background: #eeeeee;
+	color: #555555;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	width: 100%;
+}
+#pageContent-wrapper h1
+{
+	color: #000000;
+	font-family: "Trebuchet MS",Arial, Helvetica, sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+#pageContent-wrapper h2
+{
+	color: #h7h7h7;
+	font-family: "Arial Narrow",Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	margin-top: 4px;
+	padding-left: 2px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+#pageContent-wrapper #main p
+{
+	padding-bottom: 8px;
+}
+#pageContent-wrapper .clear
+{
+	clear: both;
+}
+#pageContent-wrapper #main
+{
+	margin: 60px auto;
+	width: 800px;
+}
+#pageContent-wrapper .container
+{
+	background: #AFC7C7;
+	border: 1px solid #000000;
+	border-radius: 20px;
+	khtml-border-radius: 20px;
+	margin-left: -200px;
+	margin-top: 20px;
+	moz-border-radius: 20px;
+	overflow: hidden;
+	padding: 15px;
+	webkit-border-radius: 20px;
+	width: 147%;
+}
+#pageContent-wrapper .logo
+{
+	float: left;
+	width: 26%;
+}
+#pageContent-wrapper .navigation
+{
+	background: #AFC7C7;
+	border: 1px solid #E0E0E0;
+	border-radius: 20px;
+	float: right;
+	height: 30px;
+	khtml-border-radius: 20px;
+	moz-border-radius: 20px;
+	padding: 15px;
+	webkit-border-radius: 20px;
+	width: 70%;
+}
+#pageContent-wrapper .navigation a
+{
+	background: #000000;
+	border-radius: 10px;
+	color: #ffffff;
+	float: left;
+	font-size: 22px;
+	khtml-border-radius: 10px;
+	margin-left: 10px;
+	moz-border-radius: 10px;
+	padding: 5px;
+	text-decoration: none;
+	webkit-border-radius: 10px;
+}
+#pageContent-wrapper .navigation a:hover
+{
+	color: #12768e;
+	text-decoration: none;
+}
+#pageContent-wrapper .main-container
+{
+	background: #AFC7C7;
+	border: 1px solid #E0E0E0;
+	border-radius: 20px;
+	float: left;
+	height: 100%;
+	khtml-border-radius: 20px;
+	moz-border-radius: 20px;
+	padding: 15px;
+	webkit-border-radius: 20px;
+	width: 68%;
+}
+#pageContent-wrapper .article
+{
+}
+#pageContent-wrapper .right-nav
+{
+	background: #AFC7C7;
+	border: 1px solid #E0E0E0;
+	border-radius: 20px;
+	float: right;
+	height: 100%;
+	khtml-border-radius: 20px;
+	moz-border-radius: 20px;
+	padding: 15px;
+	webkit-border-radius: 20px;
+	width: 25%;
+}
+#pageContent-wrapper .modules
+{
+}
+#pageContent-wrapper .err
+{
+	color: red;
+}
+#pageContent-wrapper .success
+{
+	color: #00CC00;
+}
+#pageContent-wrapper a, a:visited
+{
+	color: #00BBFF;
+	outline: none;
+	text-decoration: none;
+}
+#pageContent-wrapper a:hover
+{
+	text-decoration: underline;
+}
+#pageContent-wrapper .tutorial-info
+{
+	padding: 10px;
+	text-align: center;
+}

@@ -1,0 +1,55 @@
+<?php
+	  include 'include/header.php';
+?>
+		<?php if ($_SESSION['usr'] && $_SESSION['access_level']==1) { ?>
+		   <div style="float:left;color:red;margin-right:10px;" onclick="location='index.php?action=editArticle&amp;articleId=<?php echo $results['article']->id?>'">Edit</div>
+		   <div style="margin-left:10px;margin-bottom:5px;color:red;" onclick="location='index.php?action=deleteArticle&amp;articleId=<?php $results['article']->id ?>'">Delete</div>
+		<?php } ?>
+      <h1 style="width: 100%;"><?php echo htmlspecialchars( $results['article']->title )?></h1>
+      <div style="width: 100%; font-style: italic;"><?php echo htmlspecialchars( $results['article']->summary )?></div>
+      <div style="width: 100%;"><?php echo $results['article']->content?></div>
+		<span>by <?php echo $results['useridattributes']->usr?></span></br>
+		<span>Last edit by <?php echo $results['lastidattributes']->usr?></span></br>
+		<span> Last Edit date <?php echo date($results['article']->edit_date); ?></span>
+        <p class="pubDate">Published on <?php echo date($results['article']->pub_date)?>
+		<?php if ( $results['category'] ) { ?>
+				in <a href="./?action=archive&amp;categoryid=<?php echo $results['category']->id?>"><?php echo htmlspecialchars( $results['category']->name ) ?></a>
+		<?php } ?>
+      </p>
+	  <h1 style="width:100%;">Tags</h1>
+	  <span><?php if($results['article']->tagidarray){$tagstring=""; foreach($results['article']->tagidarray as $tag) { $tagstring .= $tag." "; } $tagtrimmed = mb_substr($tagstring, 0, -1); echo $tagtrimmed;}?></span>
+	  <?php if ($results['comments']) { ?>
+		<div style="width:100%;">
+			</br>
+			<a name="comments"><h1 style="width:100%;">Comments</h1></a>
+			<?php foreach ($results['comments'] as $comment) { ?>
+				<h2>
+				<span class="pubDate"><?php echo date($comment->pub_date)?></span>
+				</h2>
+				<a name="<?php echo $comment->id ?>"><p class="summary"><?php echo $comment->comment?></p></a>
+			<?php } ?>
+		</div>
+	  <?php } ?>
+	  <?php if ($_SESSION['usr']) { ?>
+	  <div style="width:100%;">
+		</br>
+		<h1 style="width:100%;">Add comments</h1>
+		<form action="index.php?action=addComment&amp;articleid=<?php echo $results['article']->id; ?>" method="post">
+		    <label for="comment">Comment text area</label>
+            <textarea style="width:100%; height:100px;" name="comment" id="comment" placeholder="Enter your comments for this article" required maxlength="1000" style="height: 5em;"></textarea>
+			<div class="buttons">
+			  <input type="submit" name="commentSubmitted" value="Submit Comment" />
+			</div>
+		</form>
+	  </div>
+	  <?php } ?>
+	</div>		
+	
+	<div class="right-nav">
+		<h1><?php echo htmlspecialchars( $results['category']->name ) ?></h1>
+	<?php if ( $results['category'] ) { ?>
+		  <h5 class="categoryDescription"><?php echo htmlspecialchars( $results['category']->description ) ?></h5>
+	<?php } ?>
+	</div>
+	</div>
+<?php include 'include/footer.php'?>

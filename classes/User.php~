@@ -1,0 +1,39 @@
+<?php
+class User
+{
+	public $id = null;
+	public $usr = null;
+	public $pass = null;
+	public $email = null;
+	public $dt = null;
+	public $regip = null;
+	public $access_level = null;
+	public $last_login = null;
+	public $phone = null;
+	public $address = null;
+	public $name = null;
+	
+	public function __construct( $data=array() ) {
+		if ( isset( $data['id'] ) ) $this->id = (int)$data['id'];
+		if ( isset( $data['usr'] ) ) $this->usr = $data['usr'];
+		if ( isset( $data['pass'] ) ) $this->pass = $data['pass'];
+		if ( isset( $data['email'] ) ) $this->email = $data['email'];
+		if ( isset( $data['dt'] ) ) $this->dt = $data['dt'];
+		if ( isset( $data['regip'] ) ) $this->regip = $data['regip'];
+		if ( isset( $data['access_level'] ) ) $this->access_level = (int)$data['access_level'];
+		if ( isset( $data['last_login'] ) ) $this->last_login = $data['last_login'];
+		if ( isset( $data['phone'] ) ) $this->phone = $data['phone'];
+		if ( isset( $data['address'] ) ) $this->address = $data['address'];
+		if ( isset( $data['name'] ) ) $this->name = $data['name'];
+	}
+	public static function getByUserId($userid) {
+		$conn = new PDO(DB_DSN);
+		$sql = "SELECT * FROM users where id=$userid";
+		$st = $conn->prepare( $sql );
+		$st->execute();
+		$row = $st->fetch();
+		$user = new User($row);
+		return $user;
+	}
+}
+?>

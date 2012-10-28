@@ -1,0 +1,23 @@
+<?php
+	/*$send = '"';
+	$send .= $_POST['categories'];
+	$send .= '","';
+	$send .= $_POST['tags'];
+	if($_POST['videolink'])
+	{
+		$send .= '","';
+		$send .= $_POST['videolink'];
+	}
+	$send .= '"';
+	print $send;*/
+	
+	$send = array();
+	$send[0] = $_POST['categories'];
+	$send[1] = $_POST['tags'];
+	if($_POST['videolink'])
+		$send[2] = $_POST['videolink'];
+	$return = $send[0].'<|>'.$send[1];
+	if($send[2]) $return .= '<|>'.$send[2];
+	
+	print $return;
+?>

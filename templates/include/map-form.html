@@ -1,0 +1,177 @@
+	<div id="dialog_save" title="Confirm Geometry">
+		
+		<form id="geomdata" action=""  method="post" enctype="multipart/form-data">
+		<div id="categories" class="formfields">Categories <select name="categories" id="categoriesSelect" onchange ="showtags(this.options[this.selectedIndex].value)" style = "width:170px;float:right; margin-top:-3px;">
+															<option value="" style="display:none;"></option>
+															</select><br />
+												<div class="helplabel">*Select an appropriate category for your geometry</div>
+												<div id="required" class="helplabel" style="color:red;">*Required</div>
+		</div>
+		
+		<div id="tags" class="formfields"> Tags <select name="tags" id="tagsSelect" style = "width: 170px;float:right; margin-top:-3px;">
+														<option value="" style="display:none;"></option>
+														<script language="javascript">
+															//Dynamic tag system needed here(3)
+																function showtags(j) {
+																			var selectedvalue = 0;
+																			for(var i=0; i<kcategory.length; i++)
+																			{
+																				if(j == kcategory[i]){
+																					selectedvalue = i;
+																				}
+																			}
+																			var innercontent = new String();
+																			for(var i=0; i<ktagcatid.length; i++)
+																			{
+																				if(ktagcatid[i] == kcatid[selectedvalue]) {
+																					innercontent = innercontent + "<option>"; 
+																					innercontent = innercontent + ktags[i];
+																					innercontent = innercontent + "</option>";
+																				}
+																			}
+																			document.getElementById('tagsSelect').innerHTML = innercontent;
+																}
+														</script>
+												</select><br /> 
+												<div class="helplabel">*Select appropriate tag(s) for your geometry</div>
+												<div id="required" class="helplabel" style="color:red;">*Required</div>
+		</div>
+		<div class="formfields" type="file"> Upload Image 
+				<div class="imageupload" onclick="uploadopen()">Choose File</div><br />
+				<div class="helplabel" style="margin-top:7px;">*Select an image of gif/jpeg/png format</div>
+		</div>
+		<div class="formfields"> Video Link <input name="videolink" id="videolink" type="url" style = "width: 170px;float:right; margin-top:-3px;">
+		<br />
+				<div class="helplabel" style="margin-top:7px;">*Enter Video url(Youtube/vimeo)</div>
+		</div>
+		</form>
+	</div>
+
+	<div id="dialog_undo" title="Edit Tools">
+	</div>
+	<div id="dialog_confirm" title="Geometry Added">
+	</div>
+	
+	<div id="dialog_upload" title="Upload Image">
+		<div class="container">
+		<!-- The file upload form used as target for the file upload widget -->
+			<form id="fileupload" action="js/pkgs/blueimp/server/php/" method="POST" enctype="multipart/form-data">
+				<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+				<div class="row fileupload-buttonbar">
+					
+					<div class="span7">
+						<!-- The fileinput-button span is used to style the file input field as button -->
+						<span class="btn btn-success fileinput-button">
+							<i class="icon-plus icon-white"></i>
+							<span>Add files..</span>
+							<input type="file" name="files[]" id="image" multiple>
+						</span>
+						<button id="cancelupload" type="reset" class="btn btn-warning cancel">
+							<i class="icon-ban-circle icon-white"></i>
+							<span>Cancel all uploads</span>
+						</button>
+					</div>
+					
+					<!-- The global progress information -->
+					<div class="span5 fileupload-progress fade">
+						<!-- The global progress bar -->
+						<div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							<div class="bar" style="width:0%;"></div>
+						</div>
+						<!-- The extended global progress information -->
+						<div class="progress-extended">&nbsp;</div>
+					</div>	
+				</div>
+				
+				<!-- The loading indicator is shown during file processing -->
+				<div class="fileupload-loading"></div>
+				<br>
+				
+				<!-- The table listing the files available for upload/download -->
+				<table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
+			</form>
+			<br>
+		</div>
+		
+		<!-- The template to display files available for upload -->
+		<script id="template-upload" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+			<tr class="template-upload fade">
+				<td class="preview"><span class="fade"></span></td>
+				<td class="name"><span>{%=file.name%}</span></td>
+				<td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+				{% if (file.error) { %}
+					<td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+				{% } else if (o.files.valid && !i) { %}
+					<td>
+						<div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+					</td>
+
+				{% } else { %}
+					<td colspan="2"></td>
+				{% } %}
+			<td class="cancel">{% if (!i) { %}
+				<button class="btn btn-danger">
+					<i class="icon-trash icon-white"></i>
+					<span>{%=locale.fileupload.cancel%}</span>
+				</button>
+			{% } %}</td>
+			</tr>
+		{% } %}
+		</script>
+		
+		<!-- The template to display files available for download -->
+		<script id="template-download" type="text/x-tmpl">
+		{% for (var i=0, file; file=o.files[i]; i++) { %}
+
+		{% } %}
+		</script>
+		
+		<div class="row fileupload-buttonbar">
+			<div class="span7">
+				<div id="elem"></div>
+			</div>
+		</div>
+	</div>
+
+	<script language="javascript">
+	
+		// Functions to handle opening and closing of the upload box
+		function uploadopen() {
+			$('#fileupload').fileupload('option', 'maxNumberOfFiles', fileaddcounter);
+			if(fileuploadcounter < 3)
+			{
+				$("#dialog_upload").dialog("open");
+				$("#dialog_upload").bind("dialogbeforeclose",function(e) {
+					$('#fileupload button:reset').click();
+				});
+			}
+			
+			else alert('You can\'t upload more than 3 files for one geometry');
+
+			
+		}
+		function uploadclose() {
+				$("#dialog_upload").dialog("close");
+		}
+	
+		//Save/discard changes form functions
+		function confirm()
+		{	
+			$('#geomdata').submit();
+			if($("#geomdata").validate().element('#categoriesSelect') && $("#geomdata").validate().element('#tagsSelect'))
+			{
+				// if new tag is added - add to database (5) - after (3)
+				// also bind popup to geometry here (6)
+			}
+		}
+		
+		function discard()
+		{
+			map.removeLayer(drawnItem);
+			stored = false;
+			$('#dialog_save').dialog("close");
+			diopen = false;
+			placed = false;
+		}
+	</script>	

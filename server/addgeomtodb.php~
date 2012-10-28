@@ -1,0 +1,105 @@
+<?php
+
+	$host = "host=localhost";
+	$port = "port=5432";
+	$dbname = "dbname=hul_prod";
+	$username = "user=hul";
+	$password = "password={DIY}Syndr*me";
+	
+	$full = $host." ".$port." ".$dbname." ".$username." ".$password;
+
+	$connection = pg_connect($full);
+
+	if(!$connection)
+	{
+		pg_close($connection);
+
+	}
+	
+	$n = $_GET['n'];
+	$type = $_GET['type'];
+	$category = $_GET['cat'];
+	$tag = $_GET['tag'];
+	if($_GET['video']) $video = $_GET['video'];
+	if($_GET['photo']) $photo = $_GET['photo'];
+	$lats = array();
+	$lngs = array();
+	
+	for($i=0;$i<$n;$i++)
+	{
+		$latstring = "lat" . $i;
+		$lngstring = "lng" . $i;
+		$lats[$i] = $_GET[$latstring]; 
+		$lngs[$i] = $_GET[$lngstring];
+	}
+
+	$query = "INSERT INTO ";
+	
+	switch($type) {
+		case "point": $query .="ogrgeojsonpoint (wkb_geometry," . $category;
+						if($photo) { 
+							$query .= ",photo";
+						}
+						
+						if($video) {
+							$query .= ",video";					
+						}
+					  $query .= ") VALUES (ST_GeomFromText('POINT("; break;
+					  
+		case "polyline": $query .="ogrgeojson1 (wkb_geometry," . $category;  
+						if($photo) { 
+							$query .= ",photo";
+						}
+						
+						if($video) {
+							$query .= ",video";					
+						}
+					     $query .= ") VALUES (ST_GeomFromText('LINESTRING("; break;
+		case "polygon": $query .="ogrgeojsonpoly (wkb_geometry," . $category; 
+						if($photo) { 
+							$query .= ",photo";
+						}
+						
+						if($video) {
+							$query .= ",video";					
+						}
+						$query .= ") VALUES (ST_GeomFromText('POLYGON(("; break;
+	}
+	
+	for($i=0; $i<$n; $i++)
+	{
+		$query .= $lngs[$i];
+		$query .= " ";
+		$query .= $lats[$i];
+		
+		if($i<($n-1))
+		$query .= ", ";
+	}
+	if($type == "polygon") {
+		$query .= ", ";
+		$query .= $lngs[0];
+		$query .= " ";
+		$query .= $lats[0];
+		$query .="))',4326),'" . $tag . "'";
+	}
+	else $query .=")',4326),'" . $tag . "'"; 
+	
+	if($photo) { 
+		$query .= ",'";
+		$query .= $photo;
+		$query .= "'";
+	}
+	
+	if($video) {
+		$query .= ",'";
+		$query .= $video;
+		$query .= "'";
+	}
+	
+	$query .= ")";
+	
+	$result1 = pg_query($connection, $query);
+
+	if($result1) echo "worked";
+		else echo $query;
+?>
