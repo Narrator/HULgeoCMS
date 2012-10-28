@@ -4,6 +4,13 @@ HULgeoCMS
 Hyderabad Urban Lab's Mapping platform allows users to access a map, on which information would be crowd-sourced.
 The platform also has a very basic CMS running, along with the mapping platform, which allows users to browse through articles under various categories and to comment on them.
 
+Documentation
+=========
+--------------
+Visit: http://hyderabadurbanlab.com/docs for an auto-generated documentation from inline documentation
+
+DocBlocks in the source code is your best bet to understanding the code better.
+
 Technical Information
 =========
 --------------
@@ -39,9 +46,3 @@ Config.php
 ==========
 Edit the database information in this file.
 
-Documentation
-=========
---------------
-Visit: http://hyderabadurbanlab.com/docs for an auto-generated documentation from inline documentation
-
-DocBlocks in the source code is your best bet to understanding the code better.
