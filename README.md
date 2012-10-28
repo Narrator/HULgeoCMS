@@ -39,3 +39,9 @@ Config.php
 ==========
 Edit the database information in this file.
 
+Documentation
+=========
+--------------
+Visit: http://hyderabadurbanlab.com/docs for an auto-generated documentation from inline documentation
+
+DocBlocks in the source code is your best bet to understanding the code better.
