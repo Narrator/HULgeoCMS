@@ -41,7 +41,7 @@
 /**
  * Defines the connection to our database
 */
-	define( "DB_DSN", "pgsql:host=localhost;dbname=hul_prod;user=hul;password={DIY}Syndr*me");
+	define( "DB_DSN", "pgsql:host=;dbname=;user=;password=");
 
 /**
  * Path to the classes directory
@@ -63,12 +63,12 @@
 /**
  * Defines Administrator Username
 */
-	define( "ADMIN_USERNAME", "kaushik" );
+	define( "ADMIN_USERNAME", "" );
 
 /**
  * Defines Administrator Password
 */
-	define( "ADMIN_PASSWORD", "gimme5" );
+	define( "ADMIN_PASSWORD", "" );
 
 /**
  * Including the respective classes - Article
