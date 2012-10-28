@@ -21,7 +21,7 @@ The application uses/requires the following:
 * Tilestache http://tilestache.org/
 
 Javascript Libraries
-====================
+--------------------
 * Leaflet http://leafletjs.com/ 
 * Leaft draw https://github.com/jacobtoye/Leaflet.draw (Modified to add an undo feature)
 * Jquery-UI dialog http://jqueryui.com/
@@ -35,14 +35,54 @@ Javascript Libraries
 (Version numbers can be found in the source code)
 
 Directory Listing
-=================
+-----------------
 * classes - contains all the PHP classes
 * templates - contains HTML templates with in-line PHP (** viewMap.php is important )
 * css - The website is being redesigned by Chandu chandu1987128@gmail.com
 * js - globals.js,registered.js (Main javascript functions). Directory "pkgs" contains all external packages.
-* server - contains server connection details for XHR calls made for storing geometry
+* server - contains server connection details for XHR calls made for storing geometry (made by registered.js)
 
 Config.php
-==========
+----------
 Edit the database information in this file.
 
+Database Information
+----------------------
+Database details have to be entered in 3 files:
+
+1. /server/addgeomtodb.php
+2. /templates/include/connect.php
+3. /config.php
+
+All the tables in the database:
+
+***Common Table (For CMS and Geometry)***
+
+* users - user profiles
+* comments - Comments for articles and geometries
+
+***CMS-specific tables***
+
+* articles - For articles
+* articlecategories - Categories of articles
+* articletags - Tags for all articles
+
+
+***Geometry Tables for crowd-sourcing geometries***
+
+* tags - Contains all tags possible
+* categories - Contains all categories possible
+* ogrgeojson1 - For new polylines 
+* ogrgeojsonpoint - For new points
+* ogrgeojsonpoly - For new polygons
+
+***Geometry Tables with Baseline information on Hyderabad (Analytics)***
+
+* circles
+* wards
+* zones
+
+***PostGIS default tables***
+
+* geometry_columns
+* spatial_ref_sys
